@@ -1,12 +1,25 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import {Provider} from "react-redux";
 
 import "./styles/index.css";
-import App from "./App";
+import store from "./state/store";
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById("root")
-);
+const render = () => {
+  const App = require("./App").default;
+
+  ReactDOM.render(
+    <React.StrictMode>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </React.StrictMode>,
+    document.getElementById("root")
+  );
+};
+
+render();
+
+if (process.env.NODE_ENV === 'development' && module.hot) {
+  module.hot.accept('./App', render)
+}
