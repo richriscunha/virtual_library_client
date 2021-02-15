@@ -1,11 +1,11 @@
-import React from 'react';
+import React, {FunctionComponent} from "react";
 
-function App() {
-  return (
-    <div>
-      <p>Hello World!</p>
-    </div>
-  );
-}
+import ApplicationLayout from "./layouts/ApplicationLayout";
+
+const App: FunctionComponent = () => (
+  <ApplicationLayout>
+    <p>Books go here...</p>
+  </ApplicationLayout>
+);
 
 export default App;
