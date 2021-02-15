@@ -1,4 +1,5 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
+import {RootState} from "../reducers";
 
 interface LibraryState {
   books: string[];
@@ -17,14 +18,14 @@ const slice = createSlice({
     addBook(state, action: PayloadAction<string>) {
       return {
         ...state,
-        books: [...state.books, action.payload]
-      }
+        books: [...state.books, action.payload],
+      };
     },
     addBooks(state, action: PayloadAction<string[]>) {
       return {
         isLoaded: true,
-        books: [...action.payload]
-      }
+        books: [...action.payload],
+      };
     },
   },
 });
@@ -32,3 +33,5 @@ const slice = createSlice({
 export const {addBook, addBooks} = slice.actions;
 
 export default slice.reducer;
+
+export const isBooksLoaded = (state: RootState) => state.library.isLoaded;

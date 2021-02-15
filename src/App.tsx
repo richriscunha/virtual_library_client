@@ -1,10 +1,11 @@
 import React, {FunctionComponent} from "react";
+import Bookshelf from "./containers/Bookshelf";
 
 import ApplicationLayout from "./layouts/ApplicationLayout";
 
 const App: FunctionComponent = () => (
   <ApplicationLayout>
-    <p>Books go here...</p>
+    <Bookshelf />
   </ApplicationLayout>
 );
 
