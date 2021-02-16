@@ -26,8 +26,8 @@ const LibraryBookGrid: FunctionComponent<LibraryBookGridProps> = ({books}) => {
   return (
     <LibraryBookGridContainer>
       {books.map((book, index) => (
-        <GridItem column={index + 1}>
-          <Book key={shortid.generate()} title={book} handleOnDelete={handleBookDelete} />
+        <GridItem key={shortid.generate()} column={index + 1}>
+          <Book title={book} handleOnDelete={handleBookDelete} />
         </GridItem>
       ))}
     </LibraryBookGridContainer>

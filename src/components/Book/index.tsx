@@ -8,11 +8,11 @@ type BookProps = {
   handleOnDelete: (title: string) => Promise<void>;
 };
 
-const Book: FunctionComponent<BookProps> = ({title, handleOnDelete, ...props}) => {
+const Book: FunctionComponent<BookProps> = ({title, handleOnDelete}) => {
   const [foreground, background] = generateColorPair();
 
   return (
-    <BookContainer {...props} foreground={foreground} background={background}>
+    <BookContainer foreground={foreground} background={background}>
       <p className="title">{title}</p>
       <div className="actions">
         <div className="individual-actions">
