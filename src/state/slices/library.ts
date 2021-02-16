@@ -31,6 +31,13 @@ const slice = createSlice({
         books: [...action.payload],
       };
     },
+    removeBook(state, action: PayloadAction<string>) {
+      return {
+        ...state,
+        isLoaded: true,
+        books: [...state.books.filter(book => book !== action.payload)],
+      };
+    },
     toggleShowNewBookModal(state, action: PayloadAction) {
       return {
         ...state,
@@ -40,7 +47,7 @@ const slice = createSlice({
   },
 });
 
-export const {addBook, addBooks, toggleShowNewBookModal} = slice.actions;
+export const {addBook, addBooks, removeBook, toggleShowNewBookModal} = slice.actions;
 
 export default slice.reducer;
 

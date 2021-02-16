@@ -5,9 +5,10 @@ import {BookContainer} from "./styles";
 
 type BookProps = {
   title: string;
+  handleOnDelete: (title: string) => Promise<void>;
 };
 
-const Book: FunctionComponent<BookProps> = ({title, ...props}) => {
+const Book: FunctionComponent<BookProps> = ({title, handleOnDelete, ...props}) => {
   const [foreground, background] = generateColorPair();
 
   return (
@@ -18,7 +19,7 @@ const Book: FunctionComponent<BookProps> = ({title, ...props}) => {
           <button className="edit" type="button">
             Edit
           </button>
-          <button className="delete" type="button">
+          <button className="delete" type="button" onClick={() => handleOnDelete(title)}>
             Delete
           </button>
         </div>

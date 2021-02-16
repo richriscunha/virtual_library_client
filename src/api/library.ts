@@ -20,3 +20,11 @@ export const saveNewBook = async (book: string): Promise<void> => {
     return Promise.reject(error);
   }
 };
+
+export const deleteBook = async (book: string): Promise<void> => {
+  try {
+    await axios.delete(`/${book}`);
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
