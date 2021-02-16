@@ -5,6 +5,18 @@ type GetBooksResponse = {
 };
 
 export const fetchAllBooks = async (): Promise<string[]> => {
-  const {data} = await axios.get<GetBooksResponse>("/");
-  return data.books;
+  try {
+    const {data} = await axios.get<GetBooksResponse>("/");
+    return data.books;
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
+
+export const saveNewBook = async (book: string): Promise<void> => {
+  try {
+    await axios.post("/", {book});
+  } catch (error) {
+    return Promise.reject(error);
+  }
 };

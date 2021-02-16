@@ -1,7 +1,7 @@
 import React, {FunctionComponent} from "react";
-import Bookshelf from "./containers/Bookshelf";
 
 import ApplicationLayout from "./layouts/ApplicationLayout";
+import Bookshelf from "./containers/Bookshelf";
 
 const App: FunctionComponent = () => (
   <ApplicationLayout>
