@@ -1,13 +1,9 @@
 import React, {FunctionComponent} from "react";
 
-type EmptyLibraryProps = {
-  onClick: VoidFunction;
-};
-
-const EmptyLibrary: FunctionComponent<EmptyLibraryProps> = ({onClick}) => {
+const EmptyLibrary: FunctionComponent = () => {
   return (
     <div>
-      <p onClick={onClick}>Add a book</p>
+      <p>You don't have any books, click the button to add one.</p>
     </div>
   );
 };

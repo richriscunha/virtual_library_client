@@ -41,15 +41,6 @@ const Bookshelf: FunctionComponent = () => {
     return null;
   }
 
-  if (isLoaded && isEmpty(libraryBooks)) {
-    return (
-      <>
-        <EmptyLibrary onClick={toggleNewBookModal} />
-        <NewBookModal />
-      </>
-    );
-  }
-
   return (
     <>
       <BookshelfContainer>
@@ -59,7 +50,8 @@ const Bookshelf: FunctionComponent = () => {
           </button>
         </BookshelfTop>
         <BookshelfBottom>
-          <LibraryBookGrid books={libraryBooks} />
+          {isEmpty(libraryBooks) && <EmptyLibrary />}
+          {!isEmpty(libraryBooks) && <LibraryBookGrid books={libraryBooks} />}
         </BookshelfBottom>
       </BookshelfContainer>
       <NewBookModal />
