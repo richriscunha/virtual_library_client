@@ -20,5 +20,5 @@ export const LibraryTitle = styled.div`
 
 export const LibraryContainer = styled.div`
   padding: 20px;
-  height: 100%;
+  height: calc(100% - 60px);
 `;

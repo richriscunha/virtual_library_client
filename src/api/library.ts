@@ -1,7 +1,10 @@
 import axios from "./http";
 
+type GetBooksResponse = {
+  books: string[];
+};
+
 export const fetchAllBooks = async (): Promise<string[]> => {
-  const books = await axios.get("/");
-  console.log("b", books);
-  return [];
+  const {data} = await axios.get<GetBooksResponse>("/");
+  return data.books;
 };

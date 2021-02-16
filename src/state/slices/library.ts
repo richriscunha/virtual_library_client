@@ -35,3 +35,4 @@ export const {addBook, addBooks} = slice.actions;
 export default slice.reducer;
 
 export const isBooksLoaded = (state: RootState) => state.library.isLoaded;
+export const getAllLibraryBooks = (state: RootState) => state.library.books;
