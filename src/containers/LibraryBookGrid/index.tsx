@@ -5,8 +5,9 @@ import chunk from "lodash/chunk";
 
 import {deleteBook} from "../../api/library";
 import Book from "../../components/Book";
-import {removeBook} from "../../state/slices/library";
+import {removeBook, setEditBook} from "../../state/slices/library";
 import {LibraryBookGridContainer, GridItem} from "./styles";
+import EditBookModal from "../EditBookModal";
 
 type LibraryBookGridProps = {
   books: string[];
@@ -25,7 +26,11 @@ const LibraryBookGrid: FunctionComponent<LibraryBookGridProps> = ({books}) => {
       for (let book = 0; book < chunks[chunk].length; book++) {
         items.push(
           <GridItem key={shortid.generate()} column={book + 1} row={chunk + 1}>
-            <Book title={chunks[chunk][book]} handleOnDelete={handleBookDelete} />
+            <Book
+              title={chunks[chunk][book]}
+              handleOnDelete={handleBookDelete}
+              handleOnEdit={handleBookEdit}
+            />
           </GridItem>
         );
       }
@@ -48,10 +53,21 @@ const LibraryBookGrid: FunctionComponent<LibraryBookGridProps> = ({books}) => {
     }
   };
 
+  const handleBookEdit = async (title: string) => {
+    try {
+      dispatch(setEditBook(title));
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
-    <LibraryBookGridContainer rows={getMaxGridRows()} columns={MAX_GRID_COLUMNS}>
-      {buildLibraryShelves()}
-    </LibraryBookGridContainer>
+    <>
+      <LibraryBookGridContainer rows={getMaxGridRows()} columns={MAX_GRID_COLUMNS}>
+        {buildLibraryShelves()}
+      </LibraryBookGridContainer>
+      <EditBookModal />
+    </>
   );
 };
 

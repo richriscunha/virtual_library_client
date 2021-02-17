@@ -1,16 +1,26 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
+
 import {RootState} from "../reducers";
 
 interface LibraryState {
   books: string[];
+  editBookTitle: undefined | string;
   isLoaded: boolean;
   showNewBookModal: boolean;
+  showEditBookModal: boolean;
 }
 
 const initialState: LibraryState = {
   books: [],
+  editBookTitle: undefined,
   isLoaded: false,
   showNewBookModal: false,
+  showEditBookModal: false,
+};
+
+type UpdateBookPayloadAction = {
+  original_book: string;
+  new_book: string;
 };
 
 const slice = createSlice({
@@ -35,7 +45,20 @@ const slice = createSlice({
       return {
         ...state,
         isLoaded: true,
-        books: [...state.books.filter(book => book !== action.payload)],
+        books: [...state.books.filter((book) => book !== action.payload)],
+      };
+    },
+    setEditBook(state, action: PayloadAction<string>) {
+      return {
+        ...state,
+        editBookTitle: action.payload,
+        showEditBookModal: true,
+      };
+    },
+    toggleEditNewBookModal(state, action: PayloadAction) {
+      return {
+        ...state,
+        showEditBookModal: !state.showEditBookModal,
       };
     },
     toggleShowNewBookModal(state, action: PayloadAction) {
@@ -44,13 +67,39 @@ const slice = createSlice({
         showNewBookModal: !state.showNewBookModal,
       };
     },
+    updateBook(state, action: PayloadAction<UpdateBookPayloadAction>) {
+      return {
+        ...state,
+        editBookTitle: undefined,
+        showEditBookModal: false,
+        books: [
+          ...state.books.map((book) => {
+            if (book === action.payload.original_book) {
+              return action.payload.new_book;
+            }
+
+            return book;
+          }),
+        ],
+      };
+    },
   },
 });
 
-export const {addBook, addBooks, removeBook, toggleShowNewBookModal} = slice.actions;
+export const {
+  addBook,
+  addBooks,
+  removeBook,
+  setEditBook,
+  toggleEditNewBookModal,
+  toggleShowNewBookModal,
+  updateBook,
+} = slice.actions;
 
 export default slice.reducer;
 
-export const isBooksLoaded = (state: RootState) => state.library.isLoaded;
-export const showNewBookModal = (state: RootState) => state.library.showNewBookModal;
 export const getAllLibraryBooks = (state: RootState) => state.library.books;
+export const getEditBookTitle = (state: RootState) => state.library.editBookTitle;
+export const isBooksLoaded = (state: RootState) => state.library.isLoaded;
+export const showEditBookModal = (state: RootState) => state.library.showEditBookModal;
+export const showNewBookModal = (state: RootState) => state.library.showNewBookModal;

@@ -6,9 +6,10 @@ import {BookContainer} from "./styles";
 type BookProps = {
   title: string;
   handleOnDelete: (title: string) => Promise<void>;
+  handleOnEdit: (title: string) => Promise<void>;
 };
 
-const Book: FunctionComponent<BookProps> = ({title, handleOnDelete}) => {
+const Book: FunctionComponent<BookProps> = ({title, handleOnDelete, handleOnEdit}) => {
   const [foreground, background] = generateColorPair();
 
   return (
@@ -16,7 +17,7 @@ const Book: FunctionComponent<BookProps> = ({title, handleOnDelete}) => {
       <p className="title">{title}</p>
       <div className="actions">
         <div className="individual-actions">
-          <button className="edit" type="button">
+          <button className="edit" type="button" onClick={() => handleOnEdit(title)}>
             Edit
           </button>
           <button className="delete" type="button" onClick={() => handleOnDelete(title)}>

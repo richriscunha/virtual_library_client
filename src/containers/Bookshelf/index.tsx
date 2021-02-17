@@ -3,16 +3,16 @@ import {useSelector, useDispatch} from "react-redux";
 import isEmpty from "lodash/isEmpty";
 
 import {fetchAllBooks} from "../../api/library";
+import EmptyLibrary from "../../components/EmptyLibrary";
+import NewBookModal from "../NewBookModal";
+import {BookshelfBottom, BookshelfContainer, BookshelfTop} from "./styles";
+import LibraryBookGrid from "../LibraryBookGrid";
 import {
   addBooks,
   getAllLibraryBooks,
   isBooksLoaded,
   toggleShowNewBookModal,
 } from "../../state/slices/library";
-import EmptyLibrary from "../../components/EmptyLibrary";
-import NewBookModal from "../NewBookModal";
-import {BookshelfBottom, BookshelfContainer, BookshelfTop} from "./styles";
-import LibraryBookGrid from "../LibraryBookGrid";
 
 const Bookshelf: FunctionComponent = () => {
   const dispatch = useDispatch();

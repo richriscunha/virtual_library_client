@@ -13,17 +13,30 @@ export const fetchAllBooks = async (): Promise<string[]> => {
   }
 };
 
-export const saveNewBook = async (book: string): Promise<void> => {
+export const deleteBook = async (book: string): Promise<void> => {
   try {
-    await axios.post("/", {book});
+    await axios.delete(`/${book}`);
   } catch (error) {
     return Promise.reject(error);
   }
 };
 
-export const deleteBook = async (book: string): Promise<void> => {
+type EditBookPayload = {
+  original_book: string;
+  new_book: string;
+};
+
+export const editBook = async ({original_book, new_book}: EditBookPayload): Promise<void> => {
   try {
-    await axios.delete(`/${book}`);
+    await axios.patch("/", {original_book, new_book});
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
+
+export const saveNewBook = async (book: string): Promise<void> => {
+  try {
+    await axios.post("/", {book});
   } catch (error) {
     return Promise.reject(error);
   }
